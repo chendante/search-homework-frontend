@@ -1,12 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <el-menu
+  :default-active="activeIndex"
+  class="el-menu-demo"
+  mode="horizontal"
+  background-color="#545c64"
+  text-color="#fff"
+  active-text-color="#ffd04b">
+  <el-menu-item index="1">首页</el-menu-item>
+  <el-menu-item index="2"><a href="127.0.0.1:8080/#/song-list" target="_blank">
+    歌曲列表
+  </a></el-menu-item>
+  <el-menu-item index="3">
+    歌曲查询
+  </el-menu-item>
+  <el-menu-item index="4" disabled>添加歌曲(尽情期待)</el-menu-item>
+  <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+</el-menu>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+      return {
+        activeIndex: '',
+      };
+  },
   name: 'App'
 }
 </script>
@@ -18,6 +39,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  width:80%;
+  margin: auto;
+  position: relative;
+}
+
+.el-menu-demo {
+  margin-bottom: 20px
+}
+
+a:link,a:visited{
+ text-decoration:none;  /*超链接无下划线*/
+}
+a:hover{
+ text-decoration:underline;  /*鼠标放上去有下划线*/
 }
 </style>
