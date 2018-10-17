@@ -1,5 +1,6 @@
 <template>
     <el-table
+      v-loading="loading"
       :data="song_list_data"
       style="width: 100%">
       <el-table-column
@@ -12,6 +13,11 @@
         label="歌名"
         width="180">
       </el-table-column>
+      <el-table-column
+        prop="id"
+        label="倒排索引ID"
+        width="180">
+      </el-table-column>
     </el-table>
 </template>
 
@@ -20,12 +26,8 @@ import Vue from 'vue'
     export default {
       data() {
         return {
-          song_list_data: [
-              {
-                  song_id:1,
-                  song_name: "sfadf"
-              }
-          ]
+          song_list_data: [],
+          loading: true
         }
       },
       mounted() {
@@ -33,21 +35,21 @@ import Vue from 'vue'
       },
       methods: {
           get_song_list(){
-            console.log(1)
-            this.$axios.get('http://127.0.0.1:8081/song/list')
+            this.axios.get('/song/list')
               .then(res => {
                 for(var i=0 ; i<res.data.length;i++)
                 {
                     Vue.set(this.song_list_data,i,{
                         song_id: res.data[i][0],
-                        song_name: res.data[i][1]
+                        song_name: res.data[i][1],
+                        id: res.data[i][2]
                     })
                     // this.song_list_data[i]={
                     //     song_id: res.data[i][0],
                     //     song_name: res.data[i][1]
                     // }
                 }
-                console.log(this.song_list_data)
+                this.loading = false
             })
           }
       }

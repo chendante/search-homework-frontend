@@ -7,15 +7,17 @@
   background-color="#545c64"
   text-color="#fff"
   active-text-color="#ffd04b">
-  <el-menu-item index="1">首页</el-menu-item>
-  <el-menu-item index="2"><a href="127.0.0.1:8080/#/song-list" target="_blank">
+  <el-menu-item index="1" @click="gotoPage(1)">首页</el-menu-item>
+  <el-menu-item index="2" @click="gotoPage(2)">
     歌曲列表
-  </a></el-menu-item>
-  <el-menu-item index="3">
+  </el-menu-item>
+  <el-menu-item index="3"  @click="gotoPage(3)">
     歌曲查询
   </el-menu-item>
-  <el-menu-item index="4" disabled>添加歌曲(尽情期待)</el-menu-item>
-  <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="4" @click="gotoPage(4)">
+    查看倒排索引
+  </el-menu-item>
+  <el-menu-item index="5" disabled>添加歌曲(尽情期待)</el-menu-item>
 </el-menu>
     <router-view/>
   </div>
@@ -27,6 +29,26 @@ export default {
       return {
         activeIndex: '',
       };
+  },
+  methods:{
+    gotoPage(i){
+      if(i==1)
+      {
+        this.$router.push({path:"/"})
+      }
+      else if(i==2)
+      {
+        this.$router.push({path:"/song-list"})
+      }
+      else if(i==3)
+      {
+        this.$router.push({path:"/search-boolean"})
+      }
+      else if(i==4)
+      {
+        this.$router.push({path:"/inverted-index"})
+      }
+    }
   },
   name: 'App'
 }
