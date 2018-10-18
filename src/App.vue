@@ -76,4 +76,8 @@ a:link,a:visited{
 a:hover{
  text-decoration:underline;  /*鼠标放上去有下划线*/
 }
+body {
+  margin:0
+  padding:0
+}
 </style>
