@@ -32,7 +32,7 @@
                             <span>{{ props.row.name }}</span>
                         </el-form-item>
                         <el-form-item label="歌词">
-                            <p v-html=" props.row.lyric "></p>
+                            <div v-html="props.row.lyric"></div>
                         </el-form-item>
                     </el-form>
                 </template>
@@ -91,7 +91,7 @@ export default {
         search_song(form){
             this.show = true
             this.loading = true
-            var str_list = form.boolean.split(" ")
+            var str_list = form.boolean.trim().split(" ")
             console.log(str_list)
             this.axios.get('/search/boolean',{params:form}
             )
