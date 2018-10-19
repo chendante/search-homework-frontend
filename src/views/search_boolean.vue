@@ -91,6 +91,7 @@ export default {
         search_song(form){
             this.show = true
             this.loading = true
+            this.song_search_list = []
             var str_list = form.boolean.trim().split(" ")
             console.log(str_list)
             this.axios.get('/search/boolean',{params:form}
