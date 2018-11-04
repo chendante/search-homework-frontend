@@ -11,11 +11,12 @@
   <el-menu-item index="2" @click="gotoPage(2)">
     歌曲列表
   </el-menu-item>
-  <el-menu-item index="3">
-    歌曲查询
+  <el-submenu index="3">
+    <template slot="title">歌曲查询</template>
+    
     <el-menu-item index="3-1"   @click="gotoPage(3)">布尔查询</el-menu-item>
-    <el-menu-item index="3-2">向量空间模型</el-menu-item>
-  </el-menu-item>
+    <el-menu-item index="3-2" @click="gotoPage(5)">向量空间模型</el-menu-item>
+  </el-submenu>
   <el-menu-item index="4" @click="gotoPage(4)">
     查看倒排索引
   </el-menu-item>
@@ -49,6 +50,11 @@ export default {
       else if(i==4)
       {
         this.$router.push({path:"/inverted-index"})
+      }
+      else if(i==5)
+      {
+        console.log(1111)
+        this.$router.push({path:"/search-vector"})
       }
     }
   },

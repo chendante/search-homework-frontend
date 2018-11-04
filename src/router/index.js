@@ -4,6 +4,7 @@ import index from '@/views/index'
 import song_list from '@/views/song_list'
 import inverted_index from '@/views/inverted_index'
 import search_boolean from '@/views/search_boolean'
+import search_vector from '@/views/search_vector'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/search-boolean',
       name: '歌词检索',
       component: search_boolean
+    },
+    {
+      path: '/search-vector',
+      name: '向量空间模型',
+      component: search_vector
     }
   ]
 })
