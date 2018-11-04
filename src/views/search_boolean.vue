@@ -14,6 +14,13 @@
             <el-row style="color:red" class="search-row">
                 直接写不希望包含的词语即可。（例：天 永远）
             </el-row>
+            <el-form-item label=" 搜索内容：">
+                <el-radio-group v-model="search_form.kind" style="margin-left:auto">
+                    <el-radio :label=0>歌词</el-radio>
+                    <el-radio :label=1>歌名</el-radio>
+                    <el-radio :label=2>歌词和歌名</el-radio>
+                </el-radio-group>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="search_song(search_form)">搜索</el-button>
             </el-form-item>
@@ -29,7 +36,7 @@
                 <template slot-scope="props" >
                     <el-form label-position="top" inline class="table-expand-form">
                         <el-form-item label="歌名">
-                            <span>{{ props.row.name }}</span>
+                            <div v-html="props.row.name2"></div>
                         </el-form-item>
                         <el-form-item label="歌词">
                             <div v-html="props.row.lyric"></div>
@@ -61,7 +68,7 @@ export default {
         return {
             song_search_list: [],
             id_search_index: [],
-            search_form: {dont:'',boolean:''},
+            search_form: {dont:'',boolean:'',kind: 0},
             loading: true,
             show: false,
             search_rules: {
@@ -91,22 +98,25 @@ export default {
         search_song(form){
             this.show = true
             this.loading = true
+            form.kind = parseInt(form.kind)
             this.song_search_list = []
             var str_list = form.boolean.trim().split(" ")
-            console.log(str_list)
             this.axios.get('/search/boolean',{params:form}
             )
               .then(res => {
                 for(var i=0 ; i<res.data.song_list.length;i++)
                 {
                     var temp_str = res.data.song_list[i][3]
+                    var temp_str2 = res.data.song_list[i][1]
                     for(var j=0;j<str_list.length;j++)
                     {
                         var reg = new RegExp(str_list[j],"g")
                         temp_str = temp_str.replace(reg,'<span class="highlight">'+str_list[j]+'</span>')
+                        temp_str2 = temp_str2.replace(reg,'<span class="highlight">'+str_list[j]+'</span>')
                     }
                      
                     Vue.set(this.song_search_list,i,{
+                        name2: temp_str2,
                         name: res.data.song_list[i][1],
                         lyric: temp_str,
                         id:  res.data.song_list[i][0],
@@ -114,7 +124,6 @@ export default {
                     })
                 }
                 this.loading = false
-                console.log(this.song_search_list)
             })
         }
     }

@@ -11,6 +11,10 @@
         当前已完成该课程的第一次作业
       </el-row>
       <el-row class="index-row">
+        下载说明文档：
+        <a href="http://47.95.200.233/search-homework/Documentation.pdf"><el-button type="primary">点击下载</el-button></a>
+      </el-row>
+      <el-row class="index-row">
         作业源码请从GitHub下载:
       </el-row>
       <el-row class="index-row"> 

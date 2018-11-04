@@ -11,8 +11,10 @@
   <el-menu-item index="2" @click="gotoPage(2)">
     歌曲列表
   </el-menu-item>
-  <el-menu-item index="3"  @click="gotoPage(3)">
+  <el-menu-item index="3">
     歌曲查询
+    <el-menu-item index="3-1"   @click="gotoPage(3)">布尔查询</el-menu-item>
+    <el-menu-item index="3-2">向量空间模型</el-menu-item>
   </el-menu-item>
   <el-menu-item index="4" @click="gotoPage(4)">
     查看倒排索引
