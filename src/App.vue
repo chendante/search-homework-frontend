@@ -20,7 +20,10 @@
   <el-menu-item index="4" @click="gotoPage(4)">
     查看倒排索引
   </el-menu-item>
-  <el-menu-item index="5" disabled>添加歌曲(尽情期待)</el-menu-item>
+    <el-menu-item index="5" @click="gotoPage(6)">
+    查看权重矩阵
+  </el-menu-item>
+  <el-menu-item index="6" disabled>添加歌曲(尽情期待)</el-menu-item>
 </el-menu>
     <router-view/>
   </div>
@@ -53,8 +56,11 @@ export default {
       }
       else if(i==5)
       {
-        console.log(1111)
         this.$router.push({path:"/search-vector"})
+      }
+      else if(i==6)
+      {
+        this.$router.push({path:"/vector-index"})
       }
     }
   },

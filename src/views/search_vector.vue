@@ -3,7 +3,14 @@
     <el-card>
         <el-form :model="search_form" :rules="search_rules" ref="search_form" label-width="150px">
             <el-form-item label="搜索文本：" prop="boolean">
-                <el-input type="textarea" :rows="2" v-model="search_form.boolean"></el-input>
+                <el-input type="textarea" :rows="2" v-model="search_form.text"></el-input>
+            </el-form-item>
+            <el-form-item label=" 搜索内容：">
+                <el-radio-group v-model="search_form.kind" style="margin-left:auto">
+                    <el-radio :label=0>歌词</el-radio>
+                    <el-radio :label=1>歌名</el-radio>
+                    <el-radio :label=2>歌词和歌名</el-radio>
+                </el-radio-group>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="search_song(search_form)">搜索</el-button>
@@ -37,8 +44,8 @@
                 prop="name">
             </el-table-column>
             <el-table-column
-                label="ID"
-                prop="id">
+                label="加权相似度"
+                prop="weight">
             </el-table-column>
         </el-table>
     </el-card>
@@ -52,12 +59,12 @@ export default {
         return {
             song_search_list: [],
             id_search_index: [],
-            search_form: {dont:'',boolean:'',kind: 0},
+            search_form: {text:'',kind: 2},
             loading: true,
             show: false,
             search_rules: {
                 boolean: [
-                    { required: true, message: '请输入布尔表达式', trigger: 'blur' }
+                    { required: true, message: '请输入搜索内容', trigger: 'blur' }
                 ]
             }
         }   
@@ -65,27 +72,13 @@ export default {
     mounted() {
     },
     methods: {
-        get_lyric_index(){
-            this.axios.get('/search/lyric-index')
-              .then(res => {
-                for(var i=0 ; i<res.data.length;i++)
-                {
-                    Vue.set(this.song_lyric_index,i,{
-                        word: res.data[i][1],
-                        id_list: res.data[i][2],
-                        id: res.data[i][0]
-                    })
-                }
-                this.loading = false
-            })
-        },
         search_song(form){
             this.show = true
             this.loading = true
             form.kind = parseInt(form.kind)
             this.song_search_list = []
-            var str_list = form.boolean.trim().split(" ")
-            this.axios.get('/search/boolean',{params:form}
+            var str_list = form.text.trim().split("")
+            this.axios.get('/search/vector',{params:form}
             )
               .then(res => {
                 for(var i=0 ; i<res.data.song_list.length;i++)
@@ -103,7 +96,7 @@ export default {
                         name2: temp_str2,
                         name: res.data.song_list[i][1],
                         lyric: temp_str,
-                        id:  res.data.song_list[i][0],
+                        weight:  res.data.song_list[i][4],
                         index_id: res.data.song_list[i][2]
                     })
                 }

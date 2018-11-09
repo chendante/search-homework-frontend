@@ -5,6 +5,7 @@ import song_list from '@/views/song_list'
 import inverted_index from '@/views/inverted_index'
 import search_boolean from '@/views/search_boolean'
 import search_vector from '@/views/search_vector'
+import vector_index from '@/views/vector_index'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/search-vector',
       name: '向量空间模型',
       component: search_vector
+    },
+    {
+      path: '/vector-index',
+      name: '权重矩阵',
+      component: vector_index
     }
   ]
 })
