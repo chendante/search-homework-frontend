@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="index">
     <el-card>
         <el-form :model="search_form" :rules="search_rules" ref="search_form" label-width="150px">
             <el-form-item label="布尔表达式：" prop="boolean">
@@ -142,5 +142,8 @@ export default {
 .table-expand-form label {
     width: 90px;
     color: #99a9bf;
+}
+.index{
+    text-align: center
 }
 </style>

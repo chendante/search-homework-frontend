@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="index">
     <el-row class="index-row">
       当前本系统中有歌曲：{{song_number}} 首
     </el-row>
@@ -61,5 +61,8 @@ export default {
 .index-row {
     margin-bottom: 10px;
     margin-top: 10px
+}
+.index{
+  text-align: center
 }
 </style>

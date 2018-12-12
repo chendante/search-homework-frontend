@@ -6,7 +6,8 @@
   mode="horizontal"
   background-color="#545c64"
   text-color="#fff"
-  active-text-color="#ffd04b">
+  active-text-color="#ffd04b"
+  >
   <el-menu-item index="1" @click="gotoPage(1)">首页</el-menu-item>
   <el-menu-item index="2" @click="gotoPage(2)">
     歌曲列表
@@ -24,8 +25,10 @@
     查看权重矩阵
   </el-menu-item>
   <el-menu-item index="6" disabled>添加歌曲(尽情期待)</el-menu-item>
+  <el-menu-item index="7" @click="gotoPage(7)">校内搜索</el-menu-item>
 </el-menu>
     <router-view/>
+    <!-- <foot ></foot> -->
   </div>
 </template>
 
@@ -34,12 +37,14 @@ export default {
   data() {
       return {
         activeIndex: '',
+        page_index: 1
       };
   },
   methods:{
     gotoPage(i){
       if(i==1)
       {
+        window.location.href
         this.$router.push({path:"/"})
       }
       else if(i==2)
@@ -62,6 +67,11 @@ export default {
       {
         this.$router.push({path:"/vector-index"})
       }
+      else if(i==7)
+      {
+        this.$router.push({path:"/ding"})
+      }
+      this.page_index = i
     }
   },
   name: 'App'
@@ -73,7 +83,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   width:80%;
   margin: auto;

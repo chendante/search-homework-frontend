@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="index">
     <el-card class="box-card">
         <el-row class="inverted-index-row">
             下载歌词的倒排索引表：
@@ -135,6 +135,9 @@ export default {
 .inverted-index-row {
     margin-bottom: 10px;
     margin-top: 10px
+}
+.index{
+  text-align: center
 }
 </style>
 
