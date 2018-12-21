@@ -9,8 +9,8 @@ import axios from 'axios'
 
 var Instance = axios.create()
 Vue.config.productionTip = false
-// Instance.defaults.baseURL = 'http://47.95.200.233:8080'
-Instance.defaults.baseURL = 'http://127.0.0.1:8080'
+Instance.defaults.baseURL = 'http://47.95.200.233:8080'
+// Instance.defaults.baseURL = 'http://127.0.0.1:8080'
 Vue.prototype.axios = Instance
 
 Vue.use(ElementUI)
